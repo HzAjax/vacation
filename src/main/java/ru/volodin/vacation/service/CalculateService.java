@@ -1,34 +1,28 @@
 package ru.volodin.vacation.service;
 
-import de.jollyday.HolidayCalendar;
-import de.jollyday.HolidayManager;
-import de.jollyday.ManagerParameter;
-import de.jollyday.ManagerParameters;
+import de.focus_shift.jollyday.core.Holiday;
+import de.focus_shift.jollyday.core.HolidayManager;
+import de.focus_shift.jollyday.core.ManagerParameters;
 import org.springframework.stereotype.Service;
-import ru.volodin.vacation.entity.CalculateDTO;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import java.time.Year;
+import java.util.Set;
+
+import static de.focus_shift.jollyday.core.HolidayCalendar.RUSSIA;
 
 @SuppressWarnings({"unused"})
 @Service
 public class CalculateService {
 
     public Float getVacationCompensationEazy(float salary, int dayCount){
-        return salary * (float) dayCount;
+        return (salary / 365) * (float) dayCount;
     }
 
-    public Float getVacationCompensationHard(CalculateDTO cacl){
-        HolidayManager holidayManager = HolidayManager.getInstance(ManagerParameters.create(HolidayCalendar.RUSSIA));
-        long daysBetween = ChronoUnit.DAYS.between(cacl.getDayStart(), cacl.getDayFinish());
-        int holidaysCount = holidayManager.getHolidays(cacl.getDayStart(),cacl.getDayFinish()).size();
-        return ((int) daysBetween - holidaysCount) * cacl.getSalary();
-    }
-
-    public static boolean isWeekend(LocalDate date) {
-        DayOfWeek dayOfWeek = date.getDayOfWeek();
-        HolidayManager manager = HolidayManager.getInstance(HolidayCalendar.RUSSIA);
-        return dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY;
+    public Set<Holiday> getVacationCompensationHard(float salary){
+        final HolidayManager holidayManager = HolidayManager.getInstance(ManagerParameters.create(RUSSIA));
+        final Set<Holiday> holidays = holidayManager.getHolidays(Year.of(2022));
+        //long daysBetween = ChronoUnit.DAYS.between(dayStart, dayFinish);
+        System.out.println(holidays.toString());
+        return holidays;
     }
 }
