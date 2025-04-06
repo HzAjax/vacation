@@ -31,7 +31,7 @@ public class CalculateService {
     }
 
     public Float getVacationCompensationHard(float salary, LocalDate start, LocalDate finish) {
-        if (salary <= 0 || finish.isAfter(start)) {
+        if (salary <= 0 || start.isAfter(finish)) {
             throw new IllegalArgumentException("Неверно указана зарплата или дата.");
         }
 
