@@ -3,6 +3,7 @@ package ru.volodin.vacation.service;
 import de.focus_shift.jollyday.core.Holiday;
 import de.focus_shift.jollyday.core.HolidayManager;
 import de.focus_shift.jollyday.core.ManagerParameters;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
@@ -22,10 +23,18 @@ public class CalculateService {
     private final int YEAR_DAYS = 365;
 
     public Float getVacationCompensationEazy(float salary, int dayCount) {
+        if (salary <= 0 || dayCount <= 0) {
+            throw new IllegalArgumentException("Неверно указана зарплата или дата.");
+        }
+
         return (salary / YEAR_DAYS) * (float) dayCount;
     }
 
     public Float getVacationCompensationHard(float salary, LocalDate start, LocalDate finish) {
+        if (salary <= 0 || finish.isAfter(start)) {
+            throw new IllegalArgumentException("Неверно указана зарплата или дата.");
+        }
+
         int countHolidaysInGap = getHolidaysCountInGap(start, finish);
         int countHolidaysInYear = getHolidaysCountInYear(start);
 

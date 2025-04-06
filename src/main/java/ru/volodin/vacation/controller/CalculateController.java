@@ -21,11 +21,7 @@ public class CalculateController {
                                                          @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start,
                                                          @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate finish){
         try{
-            if (finish.isAfter(start)) {
                 return ResponseEntity.ok(calculateService.getVacationCompensationHard(salary, start, finish));
-            } else {
-                return ResponseEntity.badRequest().body("Неверно указана дата.");
-            }
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -33,12 +29,9 @@ public class CalculateController {
 
     @GetMapping("/ez")
     public ResponseEntity<?> getVacationCompensationEazy(@RequestParam float salary,
-                                                         @RequestParam int day){
-        if(salary <= 0 || day <= 0){
-            return ResponseEntity.badRequest().body("Неверно введены данные");
-        }
+                                                         @RequestParam int dayCount){
         try {
-            return ResponseEntity.ok(calculateService.getVacationCompensationEazy(salary, day));
+            return ResponseEntity.ok(calculateService.getVacationCompensationEazy(salary, dayCount));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
