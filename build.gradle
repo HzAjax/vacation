@@ -30,7 +30,11 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-	implementation group: 'de.focus-shift', name: 'jollyday-core', version: '1.5.0'
+	implementation 'de.focus-shift:jollyday-core:1.5.0'
+	implementation 'de.focus-shift:jollyday-jackson:1.5.0'
+
+
+	implementation 'de.focus-shift:jollyday:1.5.0'
 }
 
 tasks.named('test') {
