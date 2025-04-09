@@ -24,17 +24,24 @@ repositories {
 }
 
 dependencies {
+	/* SpringBoot модули */
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	/* Кодогенерация, утилиты */
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+	/* Счетчик праздничных дней */
 	implementation 'de.focus-shift:jollyday-core:1.5.0'
 	implementation 'de.focus-shift:jollyday-jackson:1.5.0'
-
-
 	implementation 'de.focus-shift:jollyday:1.5.0'
+
+	/* Тесты и прочее */
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation 'org.mockito:mockito-core'
 }
 
 tasks.named('test') {
