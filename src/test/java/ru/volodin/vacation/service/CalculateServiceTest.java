@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CalculateServiceTest {
 
-    private final CalculateService calculateService = new CalculateService();
+    private final CalculateServiceImpl calculateService = new CalculateServiceImpl();
 
     @Test
     void testGetVacationCompensationEazy_validInput() {

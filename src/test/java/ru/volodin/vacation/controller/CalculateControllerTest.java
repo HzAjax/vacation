@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.volodin.vacation.service.CalculateService;
+import ru.volodin.vacation.service.CalculateServiceImpl;
 
 import java.time.LocalDate;
 
@@ -20,7 +20,7 @@ public class CalculateControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private CalculateService calculateService;
+    private CalculateServiceImpl calculateService;
 
     @Test
     void testGetVacationCompensationEazy_success() throws Exception {
