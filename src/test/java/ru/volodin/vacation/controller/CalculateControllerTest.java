@@ -27,7 +27,7 @@ public class CalculateControllerTest {
         Mockito.when(calculateService.getVacationCompensationEazy(60000f, 14))
                 .thenReturn(2301.37f);
 
-        mockMvc.perform(get("/vacation/calculate/ez")
+        mockMvc.perform(get("/vacation/calculate/easy")
                         .param("salary", "60000")
                         .param("dayCount", "14"))
                 .andExpect(status().isOk())
@@ -39,7 +39,7 @@ public class CalculateControllerTest {
         Mockito.when(calculateService.getVacationCompensationEazy(0f, 14))
                 .thenThrow(new IllegalArgumentException("Неверно указана зарплата или дата."));
 
-        mockMvc.perform(get("/vacation/calculate/ez")
+        mockMvc.perform(get("/vacation/calculate/easy")
                         .param("salary", "0")
                         .param("dayCount", "14"))
                 .andExpect(status().isBadRequest())
