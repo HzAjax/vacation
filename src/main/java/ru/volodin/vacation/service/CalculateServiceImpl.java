@@ -22,7 +22,7 @@ public class CalculateServiceImpl implements CalculateService{
     private final int YEAR_DAYS = 365;
 
     @Override
-    public Float getVacationCompensationEazy(float salary, int dayCount) {
+    public float getVacationCompensationEazy(float salary, int dayCount) {
         if (salary <= 0 || dayCount <= 0) {
             throw new IllegalArgumentException("Неверно указана зарплата или дата.");
         }
@@ -31,7 +31,7 @@ public class CalculateServiceImpl implements CalculateService{
     }
 
     @Override
-    public Float getVacationCompensationHard(float salary, LocalDate start, LocalDate finish) {
+    public float getVacationCompensationHard(float salary, LocalDate start, LocalDate finish) {
         if (salary <= 0 || start.isAfter(finish)) {
             throw new IllegalArgumentException("Неверно указана зарплата или дата.");
         }

@@ -27,7 +27,7 @@ public class CalculateController {
         }
     }
 
-    @GetMapping("/ez")
+    @GetMapping("/easy")
     public ResponseEntity<?> getVacationCompensationEazy(@RequestParam float salary,
                                                          @RequestParam int dayCount){
         try {
