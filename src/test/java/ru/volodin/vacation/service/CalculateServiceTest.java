@@ -3,6 +3,7 @@ package ru.volodin.vacation.service;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -69,16 +70,16 @@ class CalculateServiceTest {
         LocalDate start = LocalDate.of(2025, 1, 1);
         LocalDate end = LocalDate.of(2025, 1, 10);
 
-        int count = calculateService.getHolidaysCountInGap(start, end);
+        int count = calculateService.getHolidays(start, end);
 
         assertTrue(count >= 0);
     }
 
     @Test
     void testGetHolidaysCountInYear() {
-        LocalDate date = LocalDate.of(2025, 1, 1);
+        Year year = Year.of(2025);
 
-        int count = calculateService.getHolidaysCountInYear(date);
+        int count = calculateService.getHolidays(year);
 
         assertTrue(count > 0);
     }

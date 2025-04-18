@@ -36,8 +36,8 @@ public class CalculateServiceImpl implements CalculateService{
             throw new IllegalArgumentException("Неверно указана зарплата или дата.");
         }
 
-        int countHolidaysInGap = getHolidaysCountInGap(start, finish);
-        int countHolidaysInYear = getHolidaysCountInYear(start);
+        int countHolidaysInGap = getHolidays(start, finish);
+        int countHolidaysInYear = getHolidays(Year.of(start.getYear()));
 
         int countDays;
         if (start.getYear() % 4 == 0) {
@@ -51,19 +51,19 @@ public class CalculateServiceImpl implements CalculateService{
         return ((salary / (countDays - countHolidaysInYear) * (daysBetween - countHolidaysInGap)));
     }
 
-    protected int getHolidaysCountInGap(LocalDate start, LocalDate finish) {
+    protected int getHolidays(LocalDate start, LocalDate finish) {
         final HolidayManager holidayManager = HolidayManager.getInstance(ManagerParameters.create(RUSSIA));
         final Set<Holiday> holidaysInGap = holidayManager.getHolidays(start, finish);
 
         return getWeekendDays(start, finish, holidaysInGap).size();
     }
 
-    protected int getHolidaysCountInYear(LocalDate start) {
+    protected int getHolidays(Year year) {
         final HolidayManager holidayManager = HolidayManager.getInstance(ManagerParameters.create(RUSSIA));
-        final Set<Holiday> holidaysInGap = holidayManager.getHolidays(Year.of(start.getYear()));
+        final Set<Holiday> holidaysInGap = holidayManager.getHolidays(year);
 
-        return getWeekendDays(LocalDate.of(start.getYear(), 1, 1),
-                LocalDate.of(start.getYear(), 12, 31),
+        return getWeekendDays(LocalDate.of(year.getValue(), 1, 1),
+                LocalDate.of(year.getValue(), 12, 31),
                 holidaysInGap)
                 .size();
     }
